@@ -12,6 +12,16 @@ get_element_by_name_or_symbol() {
   echo "$ELEMENT"
 }
 
+if [[ -z $ELEMENT ]]
+then
+  echo "I could not find that element in the database."
+else
+  echo "$ELEMENT" | while IFS="|" read ATOMIC_NUMBER NAME SYMBOL TYPE MASS MELTING_POINT BOILING_POINT
+  do
+    echo "The element with atomic number $ATOMIC_NUMBER is $NAME ($SYMBOL). It's a $TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELTING_POINT celsius and a boiling point of $BOILING_POINT celsius."
+  done
+fi
+
 if [[ -z $1 ]]
 then
   echo "Please provide an element as an argument."
